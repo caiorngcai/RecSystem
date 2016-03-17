@@ -1,2 +1,7 @@
 # Cool_Information_Recommendation
-STITP_创业信息推荐平台
+
+- 学校STITP项目：创业信息推荐平台
+
+---
+
+---
