@@ -14,7 +14,21 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from InfoRec import views as InfoRec_views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', InfoRec_views.home, name="home"),
+
+    # url(r'^info/$', InfoRec_views.info, name="info"),
+    # url(r'^info/(?P<article_id>)/$', InfoRec_views.article, name="article"),
+    
+    # url(r'^partner/$', InfoRec_views.partner, name="partner"),
+    # url(r'^partner/(?P<user_id>)/$', InfoRec_views.user, name="user"),
+
+    # url(r'^tutor/$', InfoRec_views. name="tutor"),
+    # url(r'^tutor/(?P<>)$', InfoRec_views. name=""),
+
+    # url(r'^login/$', InfoRec_views.login, name="login"),
+    # url(r'^register/$', InfoRec_views.register, name="register"),
 ]
