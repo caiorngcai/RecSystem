@@ -17,8 +17,9 @@ from django.contrib import admin
 from InfoRec import views as InfoRec_views
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+
     url(r'^$', InfoRec_views.home, name="home"),
+    url(r'^admin/', include(admin.site.urls)),
 
     # url(r'^info/$', InfoRec_views.info, name="info"),
     # url(r'^info/(?P<article_id>)/$', InfoRec_views.article, name="article"),
@@ -29,6 +30,7 @@ urlpatterns = [
     # url(r'^tutor/$', InfoRec_views. name="tutor"),
     # url(r'^tutor/(?P<>)$', InfoRec_views. name=""),
 
-    # url(r'^login/$', InfoRec_views.login, name="login"),
     # url(r'^register/$', InfoRec_views.register, name="register"),
+    # url(r'^login/$', InfoRec_views.login, name="login"),
+    # url(r'^logout/$', InfoRec_views.login, name="logout"),
 ]
