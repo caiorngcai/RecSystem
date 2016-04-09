@@ -26,10 +26,20 @@
 
 ## 开发日志
 
-### 2016.4.1
+### 2016.4.9
 
+初步完成 首页 和 “创业信息”板块
+
+感觉开始第一步很不舒服，但是后面会越来越好！加油！！
 
 ---
 
 ## 借鉴参考
 
+[自强学堂_Django 基础教程](http://www.ziqiangxuetang.com/django/django-tutorial.html)
+
+[Django 1.8.2 文档](http://python.usyiyi.cn/django/index.html)
+
+[Bootstrap3 中文文档](http://v3.bootcss.com/)
+
+[Django搭建简易博客教程](https://andrew-liu.gitbooks.io/django-blog/content/index.html) ---> 分页功能的实现
