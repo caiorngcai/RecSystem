@@ -1,3 +1,4 @@
+/*.base.html*/
 body{
     padding-top: 50px;
 }
@@ -32,9 +33,10 @@ body .main-content{
 }
 
 footer {
-    margin-top: 20px;
+   margin-top: 20px;
 }
 
+/*info.html*/
 .media-object {
     width: 150px;
     height: 120px;

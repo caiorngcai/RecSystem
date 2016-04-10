@@ -58,13 +58,29 @@
 {% block content %}
 {% endblock %}
 
-<footer class="footer navbar-inverse">
+<footer id="myFooter" class="footer navbar-inverse">
     <div class="container">
         <p>底部版权信息等</p>
         <p>底部版权信息等</p>
         <p>底部版权信息等</p>
     </div>
 </footer>            
+
+
+<script language="javascript" type="text/javascript">
+    window.onload=function(){
+        var bodyHeight = document.body.clientHeight
+        var browserHeight = document.documentElement.clientHeight
+        <!--alert("bodyHeight:"+bodyHeight+"browserHeight:"+browserHeight)-->
+        <!--var footer = document.getElementsByTagName("footer")-->
+        var footer = document.getElementById("myFooter")
+        if(bodyHeight < browserHeight){
+            footer.className = "footer navbar-inverse navbar-fixed-bottom"
+        }else{
+            footer.className = "footer navbar-inverse"
+        }
+    } 
+</script>
 
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
