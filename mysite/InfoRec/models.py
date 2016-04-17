@@ -21,3 +21,18 @@ class Article(models.Model):
     
     def __str__(self):
         return self.title
+
+# 导师类
+# class Tutor(model.Model):
+
+# 用户行为表
+# class Action(models.Model):
+
+# 信息推荐结果表
+# class RecoArticle(models.Model):
+
+# 伙伴推荐结果表
+# class RecoPartner(models.Model):
+
+# 导师推荐结果表
+# class RecoTutor(models.Model):

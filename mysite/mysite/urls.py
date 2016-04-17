@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^info/$', InfoRec_views.info, name="info"),
     # url(r'^info/(?P<article_id>)/$', InfoRec_views.article, name="article"),
     
-    # url(r'^partner/$', InfoRec_views.partner, name="partner"),
+    url(r'^partner/$', InfoRec_views.partner, name="partner"),
     # url(r'^partner/(?P<user_id>)/$', InfoRec_views.user, name="user"),
 
     # url(r'^tutor/$', InfoRec_views. name="tutor"),

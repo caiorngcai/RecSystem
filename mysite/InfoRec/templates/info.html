@@ -4,11 +4,14 @@
 创业信息
 {% endblock %}
 
+{% block cssfile %}
+<link rel="stylesheet" href="/static/css/info.css">
+{% endblock %}
+
 {% block content %}
 <div class="container main-content">
     <div class="raw">
-        <div class="col-md-1"></div> 
-        <div class="col-md-7">
+        <div class="col-md-9">
             <ul class="media-list">
                 {% for post in post_list %}
                     <li class="media">
@@ -18,7 +21,7 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">{{post.title}}</h4>
+                            <a href="#"><h3 class="media-heading">{{post.title}}</h3></a>
                             <p>{{post.abstract}}</p>
                         </div>
                     </li>
@@ -54,7 +57,6 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="col-md-1"></div> 
     </div>
 </div>
 {% endblock %}

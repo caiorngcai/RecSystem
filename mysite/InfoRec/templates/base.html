@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/bootstrap-3.3.5-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/bootstrap-3.3.5-dist/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/static/css/base.css">
+    {% block cssfile %}{% endblock %}
 </head>
 
 <body>
@@ -36,7 +37,7 @@
             <ul class="nav navbar-nav">
                 <!--<li><a href="{% url 'home' %}">Welcome<span class="sr-only">(current)</span></a></li>-->
                 <li><a href="{% url 'info' %}">创业信息</a></li>
-                <li><a href="#">创业伙伴</a></li>
+                <li><a href="{% url 'partner' %}">创业伙伴</a></li>
                 <li><a href="#">创业导师</a></li>
             </ul>
 
@@ -86,7 +87,8 @@
 
 <!--<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
 <!--<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
-<script src="static/bootstrap-3.3.5-dist/js/jquery-1.12.3.min.js/"></script>
-<script src="static/bootstrap-3.3.5-dist/js/bootstrap.min.js/"></script>
+<script src="/static/bootstrap-3.3.5-dist/js/jquery-1.12.3.min.js/"></script>
+<script src="/static/bootstrap-3.3.5-dist/js/bootstrap.min.js/"></script>
+{% block jsfile %}{% endblock %}
 </body>
 </html>

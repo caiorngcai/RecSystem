@@ -22,6 +22,10 @@ def info(request):
         post_list = paginator.paginator(paginator.num_pages)
     return render(request, 'info.html', {'post_list':post_list, 'rec_list':posts[0:10]});
 
+def partner(request):
+    user_list = User.objects.all()
+    return render(request, 'partner.html', {'user_list':user_list});
+
 # def login(request):
     # if request.method == "POST":
         # uf = UserForm(request.POST)

@@ -1,0 +1,11 @@
+/*info.html*/
+
+.media-body a{
+    text-decoration: none;
+    color: black;
+}
+
+.media-object {
+    width: 150px;
+    height: 120px;
+}
