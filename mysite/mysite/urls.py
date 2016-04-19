@@ -31,6 +31,6 @@ urlpatterns = [
     # url(r'^tutor/(?P<>)$', InfoRec_views. name=""),
 
     # url(r'^register/$', InfoRec_views.register, name="register"),
-    # url(r'^login/$', InfoRec_views.login, name="login"),
-    # url(r'^logout/$', InfoRec_views.login, name="logout"),
+    url(r'^login/$', InfoRec_views.login, name="login"),
+    url(r'^logout/$', InfoRec_views.logout, name="logout"),
 ]

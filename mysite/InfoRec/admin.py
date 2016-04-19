@@ -1,13 +1,13 @@
 from django.contrib import admin
-from InfoRec.models import User, Article 
+from InfoRec.models import myuser, myarticle 
 
 # Register your models here.
 
-class UserAdmin(admin.ModelAdmin):
+class myuserAdmin(admin.ModelAdmin):
     list_display = ('id','username', 'password', 'email')
 
-class ArticleAdmin(admin.ModelAdmin):
+class myarticleAdmin(admin.ModelAdmin):
     list_display = ('id','title','pub_date','tag')
 
-admin.site.register(User, UserAdmin)
-admin.site.register(Article, ArticleAdmin)
+admin.site.register(myuser, myuserAdmin)
+admin.site.register(myarticle, myarticleAdmin)

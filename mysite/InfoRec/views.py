@@ -1,17 +1,29 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from InfoRec.models import User, Article
-from django import forms
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.models import User
+from django.contrib import auth
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger  #分页需要添加包
+from django.core.urlresolvers import reverse
+from InfoRec.models import myuser, myarticle
+from django import forms
 
 # Create your views here.
 
 def home(request):
-    post_list = Article.objects.all()[0:3]
-    return render(request, 'home.html', {'post_list':post_list,})
+    user = request.user if request.user.is_authenticated() else None
+    post_list = myarticle.objects.all()[0:3]
+
+    content={
+        'post_list':post_list,
+        'user':user,
+    }
+    return render(request, 'home.html', content)
 
 def info(request):
-    posts = Article.objects.all()[::-1]
+    user = request.user if request.user.is_authenticated() else None
+
+    posts = myarticle.objects.all()[::-1]
     paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     try:
@@ -20,24 +32,67 @@ def info(request):
         post_list = paginator.page(1)
     except EmptyPage:
         post_list = paginator.paginator(paginator.num_pages)
-    return render(request, 'info.html', {'post_list':post_list, 'rec_list':posts[0:10]});
+
+    content = {
+        'post_list':post_list,
+        'rec_list':posts[0:10],
+        'user':user,
+    }
+    return render(request, 'info.html', content);
 
 def partner(request):
-    user_list = User.objects.all()
-    return render(request, 'partner.html', {'user_list':user_list});
+    user = request.user if request.user.is_authenticated() else None
+    print(user)
 
-# def login(request):
-    # if request.method == "POST":
-        # uf = UserForm(request.POST)
-        # if uf.is_valid():
-            # # 获取表单用户密码
-            # username = uf.cleaned_data['username']
-            # password = uf.cleaned_data['password']
-            # # 获取表单数据与数据库进行比较
-            # user = User.objects.filter(username_exact = username, password_exact = password)
-            # if user:
-                # return render(request, '')
+    user_list = myuser.objects.all()
+
+    content={
+        'user_list':user_list,
+        'user':user,
+    }
+    return render(request, 'partner.html', content);
 
 # def register(request):
-    # return render(request, 'register.html');
+    # state = None
+    # if request.method == "POST":
+
+        # username = request.POST.get('username','')
+        # password = request.POST.get('password','')
+        # password_repeat = request.POST.get('password_repeat','')
+        # email_address = request.POST.get('email_address','')
+
+        # if password=='' or password_repeat=='' :
+            # state='empty'
+        # elif password != password_repeat:
+            # state='repeat_error'
+        # elif User.objects.filter(username=username):
+            # state='user_exist'
+        # else:
+            # new_username = username
+            # new_password = password
+            # new_email = email_address
+
+def login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('home'))
+    state = None
+    if request.method == "POST":
+        username = request.POST.get('username','')
+        password = request.POST.get('password','')
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse(home))
+        else:
+            state = 'not_exist_or_password_error'
     
+    content={
+        'state': state,
+        'user': None
+    }
+    return render(request, 'login.html', content);
+    
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('home'))
