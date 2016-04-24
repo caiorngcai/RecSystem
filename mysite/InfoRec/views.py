@@ -40,6 +40,9 @@ def info(request):
     }
     return render(request, 'info.html', content);
 
+# def info_detail(request, articleId):
+    # return HttpResponse("Hello World!")
+
 def partner(request):
     user = request.user if request.user.is_authenticated() else None
     print(user)
@@ -52,25 +55,36 @@ def partner(request):
     }
     return render(request, 'partner.html', content);
 
-# def register(request):
-    # state = None
-    # if request.method == "POST":
+def register(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse("home"))
+    state = None
+    if request.method == "POST":
 
-        # username = request.POST.get('username','')
-        # password = request.POST.get('password','')
-        # password_repeat = request.POST.get('password_repeat','')
-        # email_address = request.POST.get('email_address','')
+        username = request.POST.get('username','')
+        password = request.POST.get('password','')
+        password_repeat = request.POST.get('password_repeat','')
+        email_address = request.POST.get('email','')
 
-        # if password=='' or password_repeat=='' :
-            # state='empty'
-        # elif password != password_repeat:
-            # state='repeat_error'
-        # elif User.objects.filter(username=username):
-            # state='user_exist'
-        # else:
-            # new_username = username
-            # new_password = password
-            # new_email = email_address
+        if password=='' or password_repeat=='' :
+            state='empty'
+        elif password != password_repeat:
+            state='repeat_error'
+        elif User.objects.filter(username=username):
+            state='user_exist'
+        else:
+            new_user = User.objects.create_user(username=username, password=password, email=email_address)
+            new_user.save()
+            new_myuser = myuser(user=new_user,)
+            new_myuser.save()
+            state='success'
+
+    content = {
+        'active_menu': 'home',
+        'state': state,
+        'user': None,
+    }
+    return render(request, 'register.html', content)
 
 def login(request):
     if request.user.is_authenticated():
@@ -82,7 +96,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return HttpResponseRedirect(reverse(home))
+            return HttpResponseRedirect(reverse('home'))
         else:
             state = 'not_exist_or_password_error'
     
