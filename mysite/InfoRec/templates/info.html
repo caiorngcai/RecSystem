@@ -21,7 +21,7 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <a href="#"><h3 class="media-heading">{{post.title}}</h3></a>
+                            <a href="{% url 'artDetail' post.id %}" target="_blank"><h3 class="media-heading">{{post.title}}</h3></a>
                             <p>{{post.abstract}}</p>
                         </div>
                     </li>

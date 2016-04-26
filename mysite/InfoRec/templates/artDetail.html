@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block cssfile %}
+<link rel="stylesheet" href="/static/css/artDetail.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2 class="text-center">{{ article.title }}</h2>
+        </div> 
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="myabstract">摘要：{{ article.abstract }}</div>
+        </div> 
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="mycontent"><p>{{ article.content|linebreaksbr }}</p></div> 
+        </div> 
+    </div>
+</div>
+{% endblock %}

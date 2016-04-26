@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.contrib.auth.models import User
 from django.contrib import auth
@@ -40,12 +40,20 @@ def info(request):
     }
     return render(request, 'info.html', content);
 
-# def info_detail(request, articleId):
-    # return HttpResponse("Hello World!")
+def artDetail(request, articleId):
+    user = request.user if request.user.is_authenticated() else None
+
+    article = myarticle.objects.get(id=articleId)
+
+    content={
+        'article': article,
+        'user': user,  
+    }
+    return render(request, 'artDetail.html', content)
 
 def partner(request):
     user = request.user if request.user.is_authenticated() else None
-    print(user)
+    # print(user)
 
     user_list = myuser.objects.all()
 

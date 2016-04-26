@@ -22,10 +22,10 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^info/$', InfoRec_views.info, name="info"),
-    # url(r'^info/(?P<article_id>)/$', InfoRec_views.article, name="article"),
+    url(r'^info/(?P<articleId>[0-9]+)/$', InfoRec_views.artDetail, name="artDetail"),
     
     url(r'^partner/$', InfoRec_views.partner, name="partner"),
-    # url(r'^partner/(?P<user_id>)/$', InfoRec_views.user, name="user"),
+    # url(r'^partner/(?P<userId>)/$', InfoRec_views.user, name="user"),
 
     # url(r'^tutor/$', InfoRec_views. name="tutor"),
     # url(r'^tutor/(?P<>)$', InfoRec_views. name=""),
