@@ -34,5 +34,9 @@ body .main-content{
 
 footer {
     margin-top: 20px;
+    padding-top: 10px;
+    text-align: center;
+    line-height: 20px;
+    color: grey;
 }
 
