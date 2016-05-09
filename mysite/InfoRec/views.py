@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger  #åˆ†é¡
 from django.core.urlresolvers import reverse
 from InfoRec.models import myuser, myarticle
 from django import forms
+import logging
 
 # Create your views here.
 
@@ -44,6 +45,19 @@ def artDetail(request, articleId):
     user = request.user if request.user.is_authenticated() else None
 
     article = myarticle.objects.get(id=articleId)
+
+    logger = logging.getLogger('mylogger')
+    # logger.setLevel(logging.INFO)
+
+    # fh = logging.FileHandler('./InfoRec/log/test.log')
+    # fh.setLevel(logging.INFO)
+
+    # formatter = logging.Formatter('%(message)s')
+    # fh.setFormatter(formatter)
+
+    # logger.addHandler(fh)
+    # print("%s::%s" % (user.id, articleId))
+    logger.info("%s::%s"%(user.id,articleId))
 
     content={
         'article': article,

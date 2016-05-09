@@ -106,3 +106,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGGING={
+    'version':1,        
+    'disable_existing_loggers': False,
+    'handlers':{
+        'myhandler':{
+            'level': 'INFO',     
+            'class': 'logging.FileHandler',
+            'filename': './InfoRec/log/test.log',
+        }, 
+    },
+    'loggers':{
+        'mylogger': {
+            'handlers':  ['myhandler'],    
+            'level': 'INFO',
+            'propagate': True,
+        }, 
+    },
+}
