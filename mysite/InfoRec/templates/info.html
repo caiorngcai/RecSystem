@@ -53,7 +53,7 @@
             <h3>推荐列表</h3>
             <div class="list-group">
                 {% for rec in rec_list %}
-                <a class="list-group-item" href="#">{{ rec.title }}</a>
+                <a class="list-group-item" href="{% url 'artDetail' rec.id %}" target="_blank">{{ rec.title }}</a>
                 {% endfor %}
             </div>
         </div>
