@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from InfoRec.models import myuser, myarticle
 from django import forms
 import logging
+import time
 
 # Create your views here.
 
@@ -57,7 +58,7 @@ def artDetail(request, articleId):
 
     # logger.addHandler(fh)
     # print("%s::%s" % (user.id, articleId))
-    logger.info("%s::%s"%(user.id,articleId))
+    logger.info("%s::%s::%s" % (user.id, articleId, time.strftime("%Y%m%d%H%M%S",time.localtime(time.time()))))
 
     content={
         'article': article,
