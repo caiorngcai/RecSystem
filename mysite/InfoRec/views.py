@@ -58,7 +58,8 @@ def artDetail(request, articleId):
 
     # logger.addHandler(fh)
     # print("%s::%s" % (user.id, articleId))
-    logger.info("%s::%s::%s" % (user.id, articleId, time.strftime("%Y%m%d%H%M%S",time.localtime(time.time()))))
+    if user != None :
+        logger.info("%s::%s::%s" % (user.id, articleId, time.strftime("%Y%m%d%H%M%S",time.localtime(time.time()))))
 
     content={
         'article': article,
