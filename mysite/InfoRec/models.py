@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 class myuser(models.Model):
     user = models.OneToOneField(User)
     # nickname = models.CharField(max_length=16)
+    # attention = models.CharField(max_length=16)
     permission = models.IntegerField(default=1)
 
     def __str__(self):

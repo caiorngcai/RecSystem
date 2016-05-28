@@ -23,47 +23,24 @@ class commonUserCF():
 
         print("Message: Init finish!")
 
-    @staticmethod
-    def loadfile(filename):
-        '''load a file, return a generator'''
-        fp = open(filename, 'r')
-        for i, line in enumerate(fp):
-            yield line.strip('\r\n')
-            if(i == 100000):
-                break
-        fp.close()
-        print("Message: load file %s success!" % filename)
+    def recommend(self, user):
+        K = self.n_sim_user
+        N = self.n_rec_movie
+        rank = dict()
+        watched_movies = self.trainset[user]
 
-    def generate_dataset(self, filename, pivot=0.7):
-        trainset_len = 0
-        testset_len = 0
+        # v=similar user, wuv = similarity factor
+        for v, wuv in sorted(self.user_sim_mat[user].items(), key=itemgetter(1), reverse=True)[0:K]:
+            for movie in self.trainset[v]:
+                if movie in watched_movies:
+                    continue
+                rank.setdefault(movie, 0)
+                rank[movie] += wuv
 
-        for line in self.loadfile(filename):
-            user, movie, rating, timestamp = line.split("::")
-            # print("line:%s" % line)
-            # print("user=%s, movie=%s, rating=%s, timestamp=%s" % (user, movie, rating, timestamp))
-            
-            if(random.random() < pivot):
-                self.trainset.setdefault(user, {})
-                self.trainset[user][movie] = int(rating)
-                trainset_len += 1
-            else:
-                self.testset.setdefault(user, {})
-                self.testset[user][movie] = int(rating)
-                testset_len += 1
+        # return the N best movies
+        return sorted(rank.items(), key=itemgetter(1), reverse=True)[0:N]
 
-        print("Message: generate dataset success! trainset_len=%s , testset_len=%s" % (trainset_len, testset_len))
-
-        '''print trainset and testset to test program'''
-        # for user,movies in self.trainset.items():
-            # print("user:%s" % user)
-            # for movie in movies:
-                # print("user:%s, movie:%s" % (user, movie))
-
-        # for user,movies in self.testset.items():
-            # print("user:%s" % user)
-            # for movie in movies:
-                # print("user:%s, moive:%s" % (user, movie))
+        print("Message: recommendation finished!")
 
     def calculateUserSimilarity(self):
         movie2users = dict()    # movie2users is a dictionary
@@ -105,24 +82,36 @@ class commonUserCF():
                 # if usersim_mat[u][v] >= 0.5:
                     # print("%s & %s: %s" % (u, v, usersim_mat[u][v]))
 
-    def recommend(self, user):
-        K = self.n_sim_user
-        N = self.n_rec_movie
-        rank = dict()
-        watched_movies = self.trainset[user]
+    def generate_dataset(self, filename, pivot=0.7):
+        trainset_len = 0
+        testset_len = 0
 
-        # v=similar user, wuv = similarity factor
-        for v, wuv in sorted(self.user_sim_mat[user].items(), key=itemgetter(1), reverse=True)[0:K]:
-            for movie in self.trainset[v]:
-                if movie in watched_movies:
-                    continue
-                rank.setdefault(movie, 0)
-                rank[movie] += wuv
+        for line in self.loadfile(filename):
+            user, movie, rating, timestamp = line.split("::")
+            # print("line:%s" % line)
+            # print("user=%s, movie=%s, rating=%s, timestamp=%s" % (user, movie, rating, timestamp))
+            
+            if(random.random() < pivot):
+                self.trainset.setdefault(user, {})
+                self.trainset[user][movie] = int(rating)
+                trainset_len += 1
+            else:
+                self.testset.setdefault(user, {})
+                self.testset[user][movie] = int(rating)
+                testset_len += 1
 
-        # return the N best movies
-        return sorted(rank.items(), key=itemgetter(1), reverse=True)[0:N]
+        print("Message: generate dataset success! trainset_len=%s , testset_len=%s" % (trainset_len, testset_len))
 
-        print("Message: recommendation finished!")
+        '''print trainset and testset to test program'''
+        # for user,movies in self.trainset.items():
+            # print("user:%s" % user)
+            # for movie in movies:
+                # print("user:%s, movie:%s" % (user, movie))
+
+        # for user,movies in self.testset.items():
+            # print("user:%s" % user)
+            # for movie in movies:
+                # print("user:%s, moive:%s" % (user, movie))
 
     def evalute(self):
         N = self.n_rec_movie
@@ -153,6 +142,17 @@ class commonUserCF():
 
         print("Message: Evaluate finished")
         print('precision=%.4f\trecall=%.4f\tcoverage=%.4f\tpopularity=%.4f' %  (precision, recall, coverage, popularity))
+
+    @staticmethod
+    def loadfile(filename):
+        '''load a file, return a generator'''
+        fp = open(filename, 'r')
+        for i, line in enumerate(fp):
+            yield line.strip('\r\n')
+            # if(i == 100000):
+                # break
+        fp.close()
+        print("Message: load file %s success!" % filename)
 
 if __name__ == '__main__':
     ratingfile = 'ratings.dat'

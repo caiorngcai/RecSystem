@@ -19,12 +19,12 @@
         {% for per in user_list %}
         <div class="grid">
             <div class="imgholder">
-                <a href=""><img src="image/1.jpg" /></a>
+                <a href=""><img src=" /static/image/head.jpg" /></a>
             </div>
             <strong>{{ per.username }}</strong>
-            <p>用户名：xxxxxx</p>
-            <p>擅长技能：xxxxxx</p>
-            <p>创业方向：xxxxxx</p>
+            <p>用户名：{{ per.user.username }} </p>
+            <p>关注话题：</p>
+            <!--<p>关注话题：{{ per.attention }}</p>-->
             <div class="meta">
                 <button type="button" id="myButton" class="btn btn-primary btn-sm" autocomplete="off"><b>+ 关注</b></button>
             </div>

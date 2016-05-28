@@ -61,8 +61,10 @@ def artDetail(request, articleId):
     if user != None :
         logger.info("%s::%s::%s" % (user.id, articleId, time.strftime("%Y%m%d%H%M%S",time.localtime(time.time()))))
 
+    posts = myarticle.objects.all()[::-1]
     content={
         'article': article,
+        'rec_list':posts[0:10],
         'user': user,  
     }
     return render(request, 'artDetail.html', content)
